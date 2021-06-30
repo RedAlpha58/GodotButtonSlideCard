@@ -1,0 +1,169 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://assets/UpButton.png" type="Texture" id=1]
+[ext_resource path="res://assets/MenuButton.png" type="Texture" id=2]
+[ext_resource path="res://assets/LeftButton.png" type="Texture" id=3]
+[ext_resource path="res://scripts/menu.gd" type="Script" id=4]
+
+[sub_resource type="Animation" id=2]
+resource_name = "HideOptions"
+length = 0.4
+tracks/0/type = "value"
+tracks/0/path = NodePath("SlideUp:rect_position")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.2, 0.4 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 32, -288 ), Vector2( 32, -144 ), Vector2( 32, 32 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("SlideLeft:rect_position")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0.2, 0.4 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 32, -144 ), Vector2( 32, 32 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("SlideLeft:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0.4 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("SlideUp:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0.4 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+
+[sub_resource type="Animation" id=1]
+resource_name = "ShowOptions"
+length = 0.4
+tracks/0/type = "value"
+tracks/0/path = NodePath("SlideUp:rect_position")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.2, 0.4 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 32, 32 ), Vector2( 32, -144 ), Vector2( 32, -288 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("SlideLeft:rect_position")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 32, 32 ), Vector2( 32, -144 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("SlideLeft:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("SlideUp:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+
+[node name="Menu" type="TextureButton"]
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -208.0
+margin_top = -208.0
+rect_pivot_offset = Vector2( 96, 84 )
+texture_normal = ExtResource( 2 )
+stretch_mode = 1
+script = ExtResource( 4 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="SlideUp" type="TextureButton" parent="."]
+visible = false
+show_behind_parent = true
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -72.0
+margin_top = -392.0
+margin_right = 72.0
+margin_bottom = -248.0
+rect_pivot_offset = Vector2( 72, 72 )
+texture_normal = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="SlideLeft" type="TextureButton" parent="."]
+visible = false
+show_behind_parent = true
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -72.0
+margin_top = -248.0
+margin_right = 72.0
+margin_bottom = -104.0
+rect_pivot_offset = Vector2( 72, 72 )
+texture_normal = ExtResource( 3 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Tween" type="Tween" parent="."]
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/HideOptions = SubResource( 2 )
+anims/ShowOptions = SubResource( 1 )
+
+[connection signal="pressed" from="." to="." method="_on_Menu_pressed"]
+[connection signal="pressed" from="SlideUp" to="." method="_on_SlideUp_pressed"]
+[connection signal="pressed" from="SlideLeft" to="." method="_on_SlideLeft_pressed"]
